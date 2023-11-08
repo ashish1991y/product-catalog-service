@@ -1,17 +1,20 @@
 package io.bank.productcatalogservice.model;
 
 public class CatalogItem {
+
+    private String productId;
     private String name;
     private String description;
     private String rating;
 
-    public CatalogItem() {
-    }
-
-    public CatalogItem(String name, String description, String rating) {
+    public CatalogItem(String productId, String name, String description, String rating) {
+        this.productId = productId;
         this.name = name;
         this.description = description;
         this.rating = rating;
+    }
+
+    public CatalogItem() {
     }
 
     public String getName() {
@@ -36,5 +39,13 @@ public class CatalogItem {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 }
