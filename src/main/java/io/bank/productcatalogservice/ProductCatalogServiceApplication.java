@@ -15,8 +15,8 @@ public class ProductCatalogServiceApplication {
     public RestTemplate getRestTemplate() {
         //setting timeout in Rest template(not preferred way)
       /*  HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
-        clientHttpRequestFactory.setConnectTimeout(3000);*/
-       /* return new RestTemplate(clientHttpRequestFactory);*/
+        clientHttpRequestFactory.setConnectTimeout(3000);
+        return new RestTemplate(clientHttpRequestFactory);*/
         return new RestTemplate();
     }
 
