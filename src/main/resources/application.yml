@@ -1,6 +1,9 @@
 spring:
   application:
     name: product-catalog-service
+  cloud:
+    config:
+       uri: http://SPRING-CLOUD-CONFIG-SERVER
 server:
   port: 8080
 
@@ -8,13 +11,16 @@ management:
   health:
     circuitbreakers:
       enabled: true
-  endpoint:
+  endpoints:
     web:
       exposure:
-        include: health
+        include: health,refresh,message
     health:
       show-details: always
 
+fallback:
+  default:
+    string: N/A
 
 resilience4j:
   circuitbreaker:

@@ -7,6 +7,8 @@ import io.bank.productcatalogservice.model.Rating;
 import io.bank.productcatalogservice.model.UserRating;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -16,18 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalog")
+@RefreshScope
 public class ProductCatalogResource {
 
     @Autowired
     @Lazy
     RestTemplate restTemplate;
 
+    @Value("${fallback.default.string}")
+    private String fallbackValue;
     public static final String GET_PRODUCT_SERVICE="getUserService";
 
     @RequestMapping("/{productId}")
@@ -39,7 +43,7 @@ public class ProductCatalogResource {
     }
     public CatalogItem getProductFallBack(Exception e)
     {
-        return new CatalogItem("N/A","N/A","N/A","N/A");
+        return new CatalogItem(fallbackValue,fallbackValue,fallbackValue,fallbackValue);
     }
 
     @RequestMapping("/all")
